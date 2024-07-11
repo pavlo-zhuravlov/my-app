@@ -1,11 +1,9 @@
-name: Publish Docker image
-
+name: GitHub Actions Demo
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
-
 env:
   REGISTRY: docker.io
   IMAGE_NAME: pavlozhuravlovob/my-app
-
 jobs:
   push_to_registry:
     name: Push Docker image to Docker Hub
