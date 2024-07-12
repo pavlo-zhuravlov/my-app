@@ -42,7 +42,7 @@ jobs:
       - name: Update DigitalOcean App Platform Deployment
         env:
           DO_API_TOKEN: ${{ secrets.DO_API_TOKEN }}
-          DOCKER_IMAGE: mayageo/my-private-repository:${{ steps.vars.outputs.sha_short }}
+          DOCKER_IMAGE: mayageo/my-private-repository:latest
           APP_ID: ${{ secrets.DO_APP_ID }}
           SERVICE_NAME: lobster-app
         run: |
