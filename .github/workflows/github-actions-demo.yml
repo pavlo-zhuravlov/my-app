@@ -43,7 +43,7 @@ jobs:
         with:
           app_name: lobster-app
           token: ${{ secrets.DO_API_TOKEN }}
-          images: '[
+          images: '
             {
               "name": "app",
                "image":{
