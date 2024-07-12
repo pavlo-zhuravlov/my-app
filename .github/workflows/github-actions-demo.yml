@@ -49,6 +49,6 @@ jobs:
                "image":{
                 "registry_type": "DOCKER_HUB",
                 "repository": "mayageo/my-private-repository",
-                "tag": "sample"
+                "tag": "a2b259a"
               }
             }]'
