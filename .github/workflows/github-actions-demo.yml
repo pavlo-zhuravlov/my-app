@@ -38,26 +38,17 @@ jobs:
 #          push: true
 #          tags: |
 #            ${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.sha_short }}
-
-      - name: Update DigitalOcean App Platform Deployment
-        env:
-          DO_API_TOKEN: ${{ secrets.DO_API_TOKEN }}
-          DOCKER_IMAGE: mayageo/my-private-repository:latest
-          APP_ID: ${{ secrets.DO_APP_ID }}
-          SERVICE_NAME: lobster-app
-        run: |
-          # Fetch the current app spec
-          app_spec=$(curl -X GET "https://api.digitalocean.com/v2/apps/$APP_ID" \
-          -H "Authorization: Bearer $DO_API_TOKEN" \
-          -H "Content-Type: application/json" | jq -r '.app.spec')
-          
-          # Update the Docker image in the app spec
-          updated_app_spec=$(echo "$app_spec" | jq --arg image "$DOCKER_IMAGE" \
-          '.services[] |= if .name == env.SERVICE_NAME then .image.repository = $image else . end')
-  
-          # Update the app with the new spec
-          curl -X PUT "https://api.digitalocean.com/v2/apps/$APP_ID/spec" \
-          -H "Authorization: Bearer $DO_API_TOKEN" \
-          -H "Content-Type: application/json" \
-          -d "$updated_app_spec"
-
+      - name: DigitalOcean App Platform deployment
+        uses: digitalocean/app_action@v1.1.5
+        with:
+          app_name: lobster-app
+          token: ${{ secrets.DO_API_TOKEN }}
+          images: '[
+            {
+              "name": "app",
+               "image":{
+                "registry_type": "DOCKER_HUB",
+                "repository": "mayageo/my-private-repository:latest",
+                "tag": "sample"
+              },
+            }'
