@@ -1,0 +1,44 @@
+{
+  "name": "lobster-app",
+  "services": [
+    {
+      "name": "mayageo-my-private-repository",
+      "image": {
+        "registry_type": "DOCKER_HUB",
+        "registry": "mayageo",
+        "repository": "my-private-repository",
+        "tag": "latest",
+        "registry_credentials": "EV[1:2LTdvD2qOGIAZ/K5GOozMpSK3Ii77gHl:cYNSFGozmpMKeO+QeF5S6oN4AwRwA//BvQzmTrwMlAe4Mrd7tilAvWxe]"
+      },
+      "instance_size_slug": "apps-s-1vcpu-1gb",
+      "instance_count": 2,
+      "http_port": 8080
+    }
+  ],
+  "region": "fra",
+  "alerts": [
+    {
+      "rule": "DEPLOYMENT_FAILED"
+    },
+    {
+      "rule": "DOMAIN_FAILED"
+    }
+  ],
+  "ingress": {
+    "rules": [
+      {
+        "match": {
+          "path": {
+            "prefix": "/"
+          }
+        },
+        "component": {
+          "name": "mayageo-my-private-repository"
+        }
+      }
+    ]
+  },
+  "features": [
+    "buildpack-stack=ubuntu-22"
+  ]
+}
