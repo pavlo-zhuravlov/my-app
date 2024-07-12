@@ -50,5 +50,5 @@ jobs:
                 "registry_type": "DOCKER_HUB",
                 "repository": "mayageo/my-private-repository:latest",
                 "tag": "sample"
-              },
+              }
             }]'
