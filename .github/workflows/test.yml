@@ -5,6 +5,7 @@ on:
     inputs:
       flavor:
         description: "Choose the build flavor"
+        type: choice
         required: true
         default: "dev"
         options:
@@ -15,15 +16,17 @@ on:
           - monkey
       build_type:
         description: "Choose the build type"
+        type: choice
         required: true
         default: "debug"
         options:
           - debug
           - release
       upload_to_firebase:
-        description: "Upload build artifact (APK) to Firebase?"
+        description: "Upload build artifact to Firebase?"
+        type: choice
         required: true
-        default: false
+        default: "false"
         options:
           - true
           - false
