@@ -1,0 +1,45 @@
+name: Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "Select the branch to build"
+        required: true
+        default: "main"
+        type: string
+      flavor:
+        description: "Choose the build flavor"
+        required: true
+        default: "dev"
+        options:
+          - dev
+          - stg
+          - prod
+          - emulator
+          - monkey
+      build_type:
+        description: "Choose the build type"
+        required: true
+        default: "debug"
+        options:
+          - debug
+          - release
+      upload_to_firebase:
+        description: "Upload build artifact (APK) to Firebase?"
+        required: true
+        default: false
+        options:
+          - true
+          - false
+
+jobs:
+  print-inputs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print selected values
+        run: |
+          echo "Selected branch: ${{ github.event.inputs.branch }}"
+          echo "Selected flavor: ${{ github.event.inputs.flavor }}"
+          echo "Selected build type: ${{ github.event.inputs.build_type }}"
+          echo "Upload to Firebase: ${{ github.event.inputs.upload_to_firebase }}"
